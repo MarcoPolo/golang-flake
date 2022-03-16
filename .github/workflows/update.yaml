@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2.4.0
       - uses: cachix/install-nix-action@v15
-      with:
-        extra_nix_config: |
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - name: Update flake lock
         run: nix flake lock --update-input go_1_18-darwin-aarch64
       - uses: stefanzweifel/git-auto-commit-action@v4
