@@ -7,8 +7,18 @@
     flake = false;
   };
 
-  inputs.go_1_19-darwin-aarch64 = {
+  inputs.go_1_19-aarch64-darwin = {
     url = "https://go.dev/dl/go1.19.darwin-arm64.tar.gz";
+    flake = false;
+  };
+
+  inputs.go_1_18-x86_64-linux = {
+    url = "https://go.dev/dl/go1.18.linux-amd64.tar.gz";
+    flake = false;
+  };
+
+  inputs.go_1_19-x86_64-linux = {
+    url = "https://go.dev/dl/go1.19.linux-amd64.tar.gz";
     flake = false;
   };
 
@@ -23,7 +33,7 @@
             pname = "go";
             version = "1.18";
             ## TODO support other systems
-            src = inputs.go_1_18-darwin-aarch64;
+            src = builtins.getAttr "go_1_18-${system}" inputs;
             phases = [ "unpackPhase" "installPhase" ];
             installPhase = ''
               cp -r . $out
@@ -33,7 +43,7 @@
             pname = "go";
             version = "1.19";
             ## TODO support other systems
-            src = inputs.go_1_19-darwin-aarch64;
+            src = builtins.getAttr "go_1_19-${system}" inputs;
             phases = [ "unpackPhase" "installPhase" ];
             installPhase = ''
               cp -r . $out
